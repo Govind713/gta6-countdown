@@ -1,12 +1,15 @@
-import { ArrowUpRight, Bell, BellOff, CalendarDays, Clock3, Disc3, Gamepad2 } from 'lucide-react'
+import { ArrowUpRight, Bell, BellOff, CalendarDays, Clock3, Disc3, Gamepad2, Library } from 'lucide-react'
 import { AudioPlayer } from './components/AudioPlayer'
 import { BackgroundFx } from './components/BackgroundFx'
 import { CountdownCard } from './components/CountdownCard'
 import { ShareActions } from './components/ShareActions'
+import { IntelPanel } from './components/IntelPanel'
 import { useCountdown } from './hooks/useCountdown'
 import { useNotifications } from './hooks/useNotifications'
+import { useState } from 'react'
 
 function App() {
+  const [intelOpen, setIntelOpen] = useState(false)
   const { days, hours, minutes, seconds, isLaunched } = useCountdown()
   const { enabled, permission, supported, enableNotifications, disableNotifications } = useNotifications()
   const countdown = [
@@ -65,6 +68,10 @@ function App() {
           <span className="platforms"><b>PS5</b><i /> <b>XBOX SERIES X|S</b></span>
         </footer>
       </div>
+      <button className="intel-trigger" type="button" onClick={() => setIntelOpen(true)}>
+        <Library size={17} /> <span>EXPLORE LEONIDA</span>
+      </button>
+      {intelOpen && <IntelPanel onClose={() => setIntelOpen(false)} />}
     </main>
   )
 }
