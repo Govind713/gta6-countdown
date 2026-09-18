@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0518"/>
+      <stop offset=".58" stop-color="#321142"/>
+      <stop offset="1" stop-color="#f43f5e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1040" cy="110" r="270" fill="#06b6d4" opacity=".14"/>
+  <text x="78" y="100" fill="#f97316" font-family="monospace" font-size="24" font-weight="700" letter-spacing="6">WELCOME BACK TO LEONIDA</text>
+  <text x="74" y="220" fill="white" font-family="sans-serif" font-size="92" font-weight="900">GTA VI</text>
+  <text x="80" y="290" fill="#f8f6ff" font-family="monospace" font-size="31">LAUNCH COUNTDOWN</text>
+  <text x="78" y="410" fill="white" font-family="monospace" font-size="76">00 : 00 : 00 : 00</text>
+  <text x="82" y="490" fill="#ffffff" opacity=".72" font-family="monospace" font-size="22">19 NOV 2026  |  FAN-MADE COUNTDOWN</text>
+  <text x="82" y="560" fill="white" font-family="sans-serif" font-size="20" font-weight="700">gta6-countdown</text>
+</svg>
