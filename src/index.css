@@ -409,6 +409,85 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
 }
 
+.preload-panel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 10px 13px;
+  border: 1px solid rgba(6, 182, 212, 0.28);
+  background: linear-gradient(100deg, rgba(6, 182, 212, 0.1), rgba(255, 255, 255, 0.025) 56%, rgba(244, 63, 94, 0.07));
+}
+
+.preload-icon {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--cyan);
+  border: 1px solid rgba(6, 182, 212, 0.28);
+  background: rgba(6, 182, 212, 0.08);
+}
+
+.preload-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  margin-right: auto;
+}
+
+.preload-title,
+.preload-date,
+.preload-time {
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+}
+
+.preload-title {
+  color: #f4edf8;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+}
+
+.preload-title b {
+  margin-left: 5px;
+  color: var(--orange);
+  font-size: 8px;
+}
+
+.preload-date {
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.preload-time {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  color: var(--cyan);
+}
+
+.preload-time span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.preload-time strong {
+  font-size: 17px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.preload-time small,
+.preload-time i {
+  color: var(--muted);
+  font-size: 8px;
+  font-style: normal;
+}
+
 .share-actions {
   display: flex;
   align-items: center;
@@ -466,6 +545,8 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 0 22px rgba(6, 182, 212, 0.16);
   transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
+
+.mobile-intel-trigger { display: none; }
 
 .intel-trigger:hover,
 .intel-trigger:focus-visible {
@@ -720,28 +801,60 @@ a { color: inherit; text-decoration: none; }
   .card-label { margin-top: 10px; font-size: 9px; letter-spacing: 0.17em; }
   .card-index { font-size: 8px; }
   .launch-state { font-size: 8px; letter-spacing: 0.12em; line-height: 1.5; }
+  .preload-panel { gap: 8px; margin-top: 10px; padding: 8px; }
+  .preload-icon { flex-basis: 30px; width: 30px; height: 30px; }
+  .preload-title { font-size: 8px; letter-spacing: 0.07em; }
+  .preload-title b { font-size: 7px; }
+  .preload-date { font-size: 7px; letter-spacing: 0.03em; }
+  .preload-time { gap: 3px; }
+  .preload-time strong { font-size: 13px; }
+  .preload-time small,
+  .preload-time i { font-size: 7px; }
   .share-actions { margin-top: 13px; }
   .share-actions button { padding: 8px 9px; font-size: 8px; }
   .trailer-button { width: min(100%, 250px); margin: 31px auto 42px; padding: 14px 15px; font-size: 12px; }
-  .site-footer { flex-direction: column; align-items: flex-start; gap: 13px; line-height: 1.5; }
+  .site-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 8px;
+    line-height: 1.4;
+  }
+  .site-footer > span:first-child { grid-column: 1 / -1; }
+  .site-footer .platforms { grid-column: 1; grid-row: 2; }
+  .intel-trigger {
+    position: static;
+    display: flex;
+    grid-column: 2;
+    grid-row: 2;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+  }
+  .desktop-intel-trigger { display: none; }
+  .mobile-intel-trigger { display: flex; }
+  .intel-trigger span { display: none; }
 }
 
 @media (max-width: 480px) {
-  .intel-trigger { right: 13px; bottom: 64px; width: 40px; height: 40px; padding: 0; justify-content: center; }
-  .intel-trigger span { display: none; }
   .intel-header h2 { font-size: clamp(2.45rem, 13vw, 4rem); }
   .intel-close { width: 36px; height: 36px; }
   .intel-card h3 { font-size: 23px; }
   .app-shell,
   .content-wrap {
-    min-height: 0;
-    height: 100svh;
+    min-height: 100svh;
+    height: auto;
   }
+
+  .app-shell { overflow-x: clip; }
 
   .content-wrap {
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
     padding-inline: 13px;
   }
 
@@ -771,41 +884,94 @@ a { color: inherit; text-decoration: none; }
   }
   .notification-toggle span { display: none; }
 
-  .hero-section { padding: 27px 0 21px; }
-  .eyebrow { margin-bottom: 10px; font-size: 8px; gap: 7px; letter-spacing: 0.1em; }
-  .hero-section h1 { font-size: clamp(3rem, 15vw, 4.4rem); }
-  .target-pill { width: 100%; align-items: flex-start; font-size: 7px; }
-  .countdown-card { min-height: 118px; padding: 11px; background: linear-gradient(145deg, rgba(36, 20, 53, 0.8), rgba(16, 9, 29, 0.82)); }
-  .card-value { margin-top: 15px; font-size: clamp(1.9rem, 13vw, 3.3rem); }
-  .card-label { margin-top: 7px; }
+  .hero-section { padding: 13px 0 10px; }
+  .eyebrow { margin-bottom: 7px; font-size: 8px; gap: 7px; letter-spacing: 0.1em; }
+  .hero-section h1 { font-size: clamp(2.6rem, 13vw, 3.8rem); }
+  .subtitle { margin: 12px 0 8px; }
+  .target-pill { width: 100%; align-items: flex-start; padding-block: 7px; font-size: 7px; }
+  .countdown-section { padding-top: 9px; }
+  .section-heading { margin-bottom: 9px; }
+  .countdown-card { min-height: 100px; padding: 9px; background: linear-gradient(145deg, rgba(36, 20, 53, 0.8), rgba(16, 9, 29, 0.82)); }
+  .card-value { margin-top: 10px; font-size: clamp(1.8rem, 11vw, 2.8rem); }
+  .card-label { margin-top: 5px; }
   .section-heading { align-items: flex-start; gap: 8px; line-height: 1.4; }
   .live-dot { white-space: nowrap; }
   .launch-state { margin: 10px 0 0; }
+  .preload-panel { gap: 6px; margin-top: 8px; padding: 7px; }
+  .preload-icon { flex-basis: 26px; width: 26px; height: 26px; }
+  .preload-icon svg { width: 14px; height: 14px; }
+  .preload-title { font-size: 7px; }
+  .preload-title b { margin-left: 2px; font-size: 6px; }
+  .preload-date { font-size: 6px; }
+  .preload-time { gap: 2px; }
+  .preload-time strong { font-size: 11px; }
+  .preload-time small,
+  .preload-time i { font-size: 6px; }
   .share-actions { margin-top: 9px; gap: 5px; }
   .share-actions button { padding: 7px; }
   .share-actions button span { display: none; }
-  .trailer-button { margin: 17px auto 22px; padding-block: 12px; }
-  .site-footer { gap: 8px; padding-top: 10px; }
+  .trailer-button { margin: 8px auto 10px; padding-block: 9px; }
+  .site-footer { row-gap: 7px; padding-top: 5px; }
 }
 
 @media (max-width: 480px) and (max-height: 720px) {
-  .content-wrap { padding-top: 11px; padding-bottom: 9px; }
-  .wordmark-vi { font-size: 42px; }
+  .content-wrap { padding-top: 8px; padding-bottom: 6px; }
+  .wordmark-vi { font-size: 39px; }
   .sound-toggle,
   .notification-toggle { width: 34px; height: 34px; }
-  .hero-section { padding: 17px 0 12px; }
-  .hero-section h1 { font-size: clamp(2.7rem, 13vw, 3.8rem); }
-  .subtitle { margin: 14px 0 11px; }
-  .target-pill { padding-block: 7px; }
-  .countdown-section { padding-top: 10px; }
-  .section-heading { margin-bottom: 8px; }
+  .hero-section { padding: 10px 0 7px; }
+  .hero-section h1 { font-size: clamp(2.5rem, 12vw, 3.5rem); }
+  .subtitle { margin: 8px 0 6px; }
+  .target-pill { padding-block: 5px; }
+  .countdown-section { padding-top: 7px; }
+  .section-heading { margin-bottom: 6px; }
   .countdown-grid { gap: 7px; }
-  .countdown-card { min-height: 97px; padding: 9px; }
-  .card-value { margin-top: 8px; }
-  .card-label { margin-top: 4px; }
-  .launch-state { margin-top: 7px; }
-  .trailer-button { margin-top: 10px; margin-bottom: 12px; padding-block: 9px; }
-  .site-footer { gap: 5px; padding-top: 7px; }
+  .countdown-card { min-height: 82px; padding: 7px; }
+  .card-value { margin-top: 4px; font-size: clamp(1.5rem, 10vw, 2rem); }
+  .card-label { margin-top: 3px; font-size: 8px; }
+  .launch-state { margin-top: 6px; }
+  .preload-panel { gap: 5px; margin-top: 4px; padding: 4px; }
+  .preload-icon { flex-basis: 24px; width: 24px; height: 24px; }
+  .preload-icon svg { width: 13px; height: 13px; }
+  .preload-time strong { font-size: 10px; }
+  .share-actions { margin-top: 6px; }
+  .share-actions button { padding: 5px 6px; }
+  .trailer-button { margin-top: 5px; margin-bottom: 7px; padding-block: 6px; }
+  .site-footer { row-gap: 5px; padding-top: 3px; }
+  .intel-trigger { width: 40px; height: 40px; }
+}
+
+@media (max-width: 480px) and (max-height: 620px) {
+  .content-wrap { padding-top: 5px; padding-bottom: 4px; }
+  .wordmark-vi { font-size: 36px; }
+  .sound-toggle,
+  .notification-toggle { width: 32px; height: 32px; }
+  .hero-section { padding: 7px 0 5px; }
+  .eyebrow { margin-bottom: 5px; }
+  .hero-section h1 { font-size: clamp(2.25rem, 11.5vw, 3rem); }
+  .subtitle { margin: 6px 0 4px; }
+  .target-pill { padding-block: 4px; font-size: 6px; }
+  .countdown-section { padding-top: 5px; }
+  .section-heading { margin-bottom: 4px; }
+  .countdown-grid { gap: 6px; }
+  .countdown-card { min-height: 70px; padding: 5px; }
+  .card-value { margin-top: 2px; font-size: clamp(1.4rem, 8vw, 1.6rem); }
+  .card-label { margin-top: 2px; font-size: 7px; letter-spacing: 0.12em; }
+  .card-index { font-size: 7px; }
+  .launch-state { margin-top: 4px; font-size: 7px; }
+  .preload-panel { gap: 4px; margin-top: 3px; padding: 3px; }
+  .preload-icon { flex-basis: 22px; width: 22px; height: 22px; }
+  .preload-icon svg { width: 12px; height: 12px; }
+  .preload-title { font-size: 6px; }
+  .preload-date { font-size: 5px; }
+  .preload-time { gap: 1px; }
+  .preload-time strong { font-size: 9px; }
+  .preload-time small,
+  .preload-time i { font-size: 5px; }
+  .share-actions { margin-top: 4px; gap: 4px; }
+  .share-actions button { padding: 4px; }
+  .trailer-button { margin: 3px auto 4px; padding-block: 4px; }
+  .site-footer { row-gap: 3px; padding-top: 1px; }
 }
 
 @media (min-width: 701px) and (max-height: 850px) {

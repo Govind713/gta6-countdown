@@ -10,8 +10,8 @@ export interface CountdownTime {
 
 const TARGET_DATE = new Date('2026-11-19T00:00:00+05:30').getTime()
 
-function getTimeRemaining(): CountdownTime {
-  const difference = Math.max(0, TARGET_DATE - Date.now())
+function getTimeRemaining(targetDate: number): CountdownTime {
+  const difference = Math.max(0, targetDate - Date.now())
 
   return {
     days: Math.floor(difference / 86_400_000),
@@ -22,13 +22,13 @@ function getTimeRemaining(): CountdownTime {
   }
 }
 
-export function useCountdown(): CountdownTime {
-  const [time, setTime] = useState<CountdownTime>(getTimeRemaining)
+export function useCountdown(targetDate = TARGET_DATE): CountdownTime {
+  const [time, setTime] = useState<CountdownTime>(() => getTimeRemaining(targetDate))
 
   useEffect(() => {
-    const timer = window.setInterval(() => setTime(getTimeRemaining()), 1000)
+    const timer = window.setInterval(() => setTime(getTimeRemaining(targetDate)), 1000)
     return () => window.clearInterval(timer)
-  }, [])
+  }, [targetDate])
 
   return time
 }

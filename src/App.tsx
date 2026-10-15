@@ -1,4 +1,4 @@
-import { ArrowUpRight, Bell, BellOff, CalendarDays, Clock3, Disc3, Gamepad2, Library } from 'lucide-react'
+import { ArrowUpRight, Bell, BellOff, CalendarDays, Clock3, Disc3, Download, Gamepad2, Library } from 'lucide-react'
 import { AudioPlayer } from './components/AudioPlayer'
 import { BackgroundFx } from './components/BackgroundFx'
 import { CountdownCard } from './components/CountdownCard'
@@ -11,6 +11,7 @@ import { useState } from 'react'
 function App() {
   const [intelOpen, setIntelOpen] = useState(false)
   const { days, hours, minutes, seconds, isLaunched } = useCountdown()
+  const preload = useCountdown(new Date('2026-11-17T00:00:00+05:30').getTime())
   const { enabled, permission, supported, enableNotifications, disableNotifications } = useNotifications()
   const countdown = [
     { label: 'DAYS', value: days, icon: <CalendarDays size={18} /> },
@@ -56,6 +57,22 @@ function App() {
             {countdown.map((item, index) => <CountdownCard key={item.label} {...item} index={index} />)}
           </div>
           <p className="launch-state">{isLaunched ? 'WELCOME TO LEONIDA' : 'TIME UNTIL WE RIDE INTO THE SUNSET'}</p>
+          <aside className="preload-panel" aria-label="Estimated India preload countdown">
+            <span className="preload-icon"><Download size={17} /></span>
+            <div className="preload-copy">
+              <span className="preload-title">INDIA PRELOAD <b>ESTIMATED</b></span>
+              <span className="preload-date">17 NOV 2026 · 00:00 IST</span>
+            </div>
+            <div className="preload-time" aria-label={`${preload.days} days, ${preload.hours} hours, ${preload.minutes} minutes and ${preload.seconds} seconds`}>
+              <span><strong>{String(preload.days).padStart(2, '0')}</strong><small>D</small></span>
+              <i>:</i>
+              <span><strong>{String(preload.hours).padStart(2, '0')}</strong><small>H</small></span>
+              <i>:</i>
+              <span><strong>{String(preload.minutes).padStart(2, '0')}</strong><small>M</small></span>
+              <i>:</i>
+              <span><strong>{String(preload.seconds).padStart(2, '0')}</strong><small>S</small></span>
+            </div>
+          </aside>
           <ShareActions days={days} hours={hours} minutes={minutes} seconds={seconds} />
         </section>
 
@@ -66,9 +83,12 @@ function App() {
         <footer className="site-footer">
           <span>FAN-MADE COUNTDOWN • NOT AFFILIATED WITH ROCKSTAR GAMES</span>
           <span className="platforms"><b>PS5</b><i /> <b>XBOX SERIES X|S</b></span>
+          <button className="intel-trigger mobile-intel-trigger" type="button" onClick={() => setIntelOpen(true)}>
+            <Library size={17} /> <span>EXPLORE LEONIDA</span>
+          </button>
         </footer>
       </div>
-      <button className="intel-trigger" type="button" onClick={() => setIntelOpen(true)}>
+      <button className="intel-trigger desktop-intel-trigger" type="button" onClick={() => setIntelOpen(true)}>
         <Library size={17} /> <span>EXPLORE LEONIDA</span>
       </button>
       {intelOpen && <IntelPanel onClose={() => setIntelOpen(false)} />}
