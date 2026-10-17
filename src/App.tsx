@@ -11,7 +11,7 @@ import { useState } from 'react'
 function App() {
   const [intelOpen, setIntelOpen] = useState(false)
   const { days, hours, minutes, seconds, isLaunched } = useCountdown()
-  const preload = useCountdown(new Date('2026-11-17T00:00:00+05:30').getTime())
+  const preload = useCountdown(new Date('2026-11-12T00:00:00+05:30').getTime())
   const { enabled, permission, supported, enableNotifications, disableNotifications } = useNotifications()
   const countdown = [
     { label: 'DAYS', value: days, icon: <CalendarDays size={18} /> },
@@ -61,7 +61,7 @@ function App() {
             <span className="preload-icon"><Download size={17} /></span>
             <div className="preload-copy">
               <span className="preload-title">INDIA PRELOAD <b>ESTIMATED</b></span>
-              <span className="preload-date">17 NOV 2026 · 00:00 IST</span>
+              <span className="preload-date">12 NOV 2026 · 00:00 IST</span>
             </div>
             <div className="preload-time" aria-label={`${preload.days} days, ${preload.hours} hours, ${preload.minutes} minutes and ${preload.seconds} seconds`}>
               <span><strong>{String(preload.days).padStart(2, '0')}</strong><small>D</small></span>
