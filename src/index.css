@@ -918,8 +918,8 @@ a { color: inherit; text-decoration: none; }
   .eyebrow { margin-bottom: 7px; font-size: 8px; gap: 7px; letter-spacing: 0.1em; }
   .hero-section h1 { font-size: clamp(2.6rem, 13vw, 3.8rem); }
   .subtitle { margin: 12px 0 8px; }
-  .target-pill { width: 100%; align-items: flex-start; padding-block: 7px; font-size: 7px; }
-  .event-time { font-size: 8px; }
+  .target-pill { width: 100%; flex-wrap: wrap; align-items: center; padding-block: 7px; font-size: 9px; line-height: 1.6; }
+  .event-time { font-size: 10px; }
   .countdown-section { padding-top: 9px; }
   .section-heading { margin-bottom: 9px; }
   .countdown-card { min-height: 100px; padding: 9px; background: linear-gradient(145deg, rgba(36, 20, 53, 0.8), rgba(16, 9, 29, 0.82)); }
@@ -933,14 +933,14 @@ a { color: inherit; text-decoration: none; }
   .preload-panel.is-ready .preload-time { flex: 1 0 100%; justify-content: center; padding-top: 6px; border-top: 1px solid rgba(6, 182, 212, 0.2); text-align: center; }
   .preload-icon { flex-basis: 26px; width: 26px; height: 26px; }
   .preload-icon svg { width: 14px; height: 14px; }
-  .preload-title { font-size: 8px; }
+  .preload-title { font-size: 9px; }
   .preload-title b { margin-left: 2px; font-size: 6px; }
-  .preload-date { font-size: 7px; }
+  .preload-date { font-size: 8px; }
   .preload-time { gap: 2px; }
-  .preload-ready-message { font-size: 8px; }
-  .preload-time strong { font-size: 11px; }
+  .preload-ready-message { font-size: 14px; }
+  .preload-time strong { font-size: 13px; }
   .preload-time small,
-  .preload-time i { font-size: 6px; }
+  .preload-time i { font-size: 7px; }
   .share-actions { margin-top: 9px; gap: 5px; }
   .share-actions button { padding: 7px; }
   .share-actions button span { display: none; }
@@ -967,10 +967,10 @@ a { color: inherit; text-decoration: none; }
   .preload-panel { gap: 5px; margin-top: 4px; padding: 4px; }
   .preload-icon { flex-basis: 24px; width: 24px; height: 24px; }
   .preload-icon svg { width: 13px; height: 13px; }
-  .preload-ready-message { font-size: 7px; }
-  .preload-title { font-size: 7px; }
-  .preload-date { font-size: 7px; }
-  .preload-time strong { font-size: 10px; }
+  .preload-ready-message { font-size: 13px; }
+  .preload-title { font-size: 8px; }
+  .preload-date { font-size: 8px; }
+  .preload-time strong { font-size: 12px; }
   .share-actions { margin-top: 6px; }
   .share-actions button { padding: 5px 6px; }
   .trailer-button { margin-top: 5px; margin-bottom: 7px; padding-block: 6px; }
@@ -987,8 +987,8 @@ a { color: inherit; text-decoration: none; }
   .eyebrow { margin-bottom: 5px; }
   .hero-section h1 { font-size: clamp(2.25rem, 11.5vw, 3rem); }
   .subtitle { margin: 6px 0 4px; }
-  .target-pill { padding-block: 4px; font-size: 6px; }
-  .event-time { font-size: 7px; }
+  .target-pill { padding-block: 4px; font-size: 8px; }
+  .event-time { font-size: 9px; }
   .countdown-section { padding-top: 5px; }
   .section-heading { margin-bottom: 4px; }
   .countdown-grid { gap: 6px; }
@@ -1000,12 +1000,12 @@ a { color: inherit; text-decoration: none; }
   .preload-panel { gap: 4px; margin-top: 3px; padding: 3px; }
   .preload-icon { flex-basis: 22px; width: 22px; height: 22px; }
   .preload-icon svg { width: 12px; height: 12px; }
-  .preload-title { font-size: 7px; }
-  .preload-date { font-size: 6px; }
-  .preload-time { gap: 1px; }
-  .preload-time strong { font-size: 9px; }
+  .preload-title { font-size: 8px; }
+  .preload-date { font-size: 8px; }
+  .preload-time { gap: 2px; }
+  .preload-time strong { font-size: 12px; }
   .preload-time small,
-  .preload-time i { font-size: 5px; }
+  .preload-time i { font-size: 6px; }
   .share-actions { margin-top: 4px; gap: 4px; }
   .share-actions button { padding: 4px; }
   .trailer-button { margin: 3px auto 4px; padding-block: 4px; }
