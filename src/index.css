@@ -300,6 +300,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid rgba(6, 182, 212, 0.35);
   background: rgba(6, 182, 212, 0.1);
   color: var(--cyan);
+  font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -454,7 +455,7 @@ a { color: inherit; text-decoration: none; }
 
 .preload-title {
   color: #f4edf8;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.12em;
 }
 
@@ -466,7 +467,7 @@ a { color: inherit; text-decoration: none; }
 
 .preload-date {
   color: var(--muted);
-  font-size: 8px;
+  font-size: 10px;
   letter-spacing: 0.08em;
 }
 
@@ -481,6 +482,19 @@ a { color: inherit; text-decoration: none; }
   align-items: baseline;
   gap: 5px;
   color: var(--cyan);
+}
+
+.preload-time.preload-ready {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.preload-ready-message {
+  color: var(--cyan);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.06em;
 }
 
 .preload-time span {
@@ -807,6 +821,7 @@ a { color: inherit; text-decoration: none; }
   .hero-section h1 { line-height: 0.86; font-size: clamp(3.3rem, 16vw, 5rem); }
   .subtitle { margin: 23px 0 18px; font-size: 9px; letter-spacing: 0.14em; }
   .target-pill { max-width: 100%; padding: 9px 10px; font-size: 8px; gap: 6px; letter-spacing: 0.04em; line-height: 1.5; }
+  .event-time { font-size: 9px; }
   .countdown-section { padding-top: 14px; }
   .section-heading { margin-bottom: 14px; font-size: 8px; letter-spacing: 0.11em; }
   .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
@@ -817,10 +832,11 @@ a { color: inherit; text-decoration: none; }
   .launch-state { font-size: 8px; letter-spacing: 0.12em; line-height: 1.5; }
   .preload-panel { gap: 8px; margin-top: 10px; padding: 8px; }
   .preload-icon { flex-basis: 30px; width: 30px; height: 30px; }
-  .preload-title { font-size: 8px; letter-spacing: 0.07em; }
+  .preload-title { font-size: 9px; letter-spacing: 0.07em; }
   .preload-title b { font-size: 7px; }
-  .preload-date { font-size: 7px; letter-spacing: 0.03em; }
+  .preload-date { font-size: 8px; letter-spacing: 0.03em; }
   .preload-time { gap: 3px; }
+  .preload-ready-message { font-size: 9px; }
   .preload-time strong { font-size: 13px; }
   .preload-time small,
   .preload-time i { font-size: 7px; }
@@ -903,6 +919,7 @@ a { color: inherit; text-decoration: none; }
   .hero-section h1 { font-size: clamp(2.6rem, 13vw, 3.8rem); }
   .subtitle { margin: 12px 0 8px; }
   .target-pill { width: 100%; align-items: flex-start; padding-block: 7px; font-size: 7px; }
+  .event-time { font-size: 8px; }
   .countdown-section { padding-top: 9px; }
   .section-heading { margin-bottom: 9px; }
   .countdown-card { min-height: 100px; padding: 9px; background: linear-gradient(145deg, rgba(36, 20, 53, 0.8), rgba(16, 9, 29, 0.82)); }
@@ -912,12 +929,15 @@ a { color: inherit; text-decoration: none; }
   .live-dot { white-space: nowrap; }
   .launch-state { margin: 10px 0 0; }
   .preload-panel { gap: 6px; margin-top: 8px; padding: 7px; }
+  .preload-panel.is-ready { flex-wrap: wrap; }
+  .preload-panel.is-ready .preload-time { flex: 1 0 100%; justify-content: center; padding-top: 6px; border-top: 1px solid rgba(6, 182, 212, 0.2); text-align: center; }
   .preload-icon { flex-basis: 26px; width: 26px; height: 26px; }
   .preload-icon svg { width: 14px; height: 14px; }
-  .preload-title { font-size: 7px; }
+  .preload-title { font-size: 8px; }
   .preload-title b { margin-left: 2px; font-size: 6px; }
-  .preload-date { font-size: 6px; }
+  .preload-date { font-size: 7px; }
   .preload-time { gap: 2px; }
+  .preload-ready-message { font-size: 8px; }
   .preload-time strong { font-size: 11px; }
   .preload-time small,
   .preload-time i { font-size: 6px; }
@@ -947,6 +967,9 @@ a { color: inherit; text-decoration: none; }
   .preload-panel { gap: 5px; margin-top: 4px; padding: 4px; }
   .preload-icon { flex-basis: 24px; width: 24px; height: 24px; }
   .preload-icon svg { width: 13px; height: 13px; }
+  .preload-ready-message { font-size: 7px; }
+  .preload-title { font-size: 7px; }
+  .preload-date { font-size: 7px; }
   .preload-time strong { font-size: 10px; }
   .share-actions { margin-top: 6px; }
   .share-actions button { padding: 5px 6px; }
@@ -965,6 +988,7 @@ a { color: inherit; text-decoration: none; }
   .hero-section h1 { font-size: clamp(2.25rem, 11.5vw, 3rem); }
   .subtitle { margin: 6px 0 4px; }
   .target-pill { padding-block: 4px; font-size: 6px; }
+  .event-time { font-size: 7px; }
   .countdown-section { padding-top: 5px; }
   .section-heading { margin-bottom: 4px; }
   .countdown-grid { gap: 6px; }
@@ -976,8 +1000,8 @@ a { color: inherit; text-decoration: none; }
   .preload-panel { gap: 4px; margin-top: 3px; padding: 3px; }
   .preload-icon { flex-basis: 22px; width: 22px; height: 22px; }
   .preload-icon svg { width: 12px; height: 12px; }
-  .preload-title { font-size: 6px; }
-  .preload-date { font-size: 5px; }
+  .preload-title { font-size: 7px; }
+  .preload-date { font-size: 6px; }
   .preload-time { gap: 1px; }
   .preload-time strong { font-size: 9px; }
   .preload-time small,

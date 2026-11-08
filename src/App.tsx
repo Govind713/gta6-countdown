@@ -6,7 +6,7 @@ import { ShareActions } from './components/ShareActions'
 import { IntelPanel } from './components/IntelPanel'
 import { useCountdown } from './hooks/useCountdown'
 import { useNotifications } from './hooks/useNotifications'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const RELEASE_DATE = new Date('2026-11-19T00:00:00+05:30')
 const PRELOAD_DATE = new Date('2026-11-10T00:00:00+05:30')
@@ -23,9 +23,18 @@ const eventTimeFormatter = new Intl.DateTimeFormat('en-IN', {
 
 function App() {
   const [intelOpen, setIntelOpen] = useState(false)
+  const [preloadReady, setPreloadReady] = useState(false)
   const { days, hours, minutes, seconds, isLaunched } = useCountdown(RELEASE_DATE.getTime())
   const preload = useCountdown(PRELOAD_DATE.getTime())
   const { enabled, permission, supported, enableNotifications, disableNotifications } = useNotifications()
+
+  useEffect(() => {
+    if (!preload.isLaunched) return
+
+    const timeout = window.setTimeout(() => setPreloadReady(true), 3000)
+    return () => window.clearTimeout(timeout)
+  }, [preload.isLaunched])
+
   const countdown = [
     { label: 'DAYS', value: days, icon: <CalendarDays size={18} /> },
     { label: 'HOURS', value: hours, icon: <Clock3 size={18} /> },
@@ -70,20 +79,30 @@ function App() {
             {countdown.map((item, index) => <CountdownCard key={item.label} {...item} index={index} />)}
           </div>
           <p className="launch-state">{isLaunched ? 'WELCOME TO LEONIDA' : 'TIME UNTIL WE RIDE INTO THE SUNSET'}</p>
-          <aside className="preload-panel" aria-label="Estimated India preload countdown">
+          <aside className={`preload-panel${preloadReady ? ' is-ready' : ''}`} aria-label={preloadReady ? 'India preload available' : 'Estimated India preload countdown'}>
             <span className="preload-icon"><Download size={17} /></span>
             <div className="preload-copy">
               <span className="preload-title">INDIA PRELOAD <b>ESTIMATED</b></span>
               <span className="preload-date">{eventWeekdayFormatter.format(PRELOAD_DATE).toUpperCase()} · 10 NOV 2026 · <span className="preload-clock">{eventTimeFormatter.format(PRELOAD_DATE).toUpperCase()} IST</span></span>
             </div>
-            <div className="preload-time" aria-label={`${preload.days} days, ${preload.hours} hours, ${preload.minutes} minutes and ${preload.seconds} seconds`}>
-              <span><strong>{String(preload.days).padStart(2, '0')}</strong><small>D</small></span>
-              <i>:</i>
-              <span><strong>{String(preload.hours).padStart(2, '0')}</strong><small>H</small></span>
-              <i>:</i>
-              <span><strong>{String(preload.minutes).padStart(2, '0')}</strong><small>M</small></span>
-              <i>:</i>
-              <span><strong>{String(preload.seconds).padStart(2, '0')}</strong><small>S</small></span>
+            <div
+              className={`preload-time${preloadReady ? ' preload-ready' : ''}`}
+              aria-label={preloadReady ? 'GTA VI can now be pre-loaded' : `${preload.days} days, ${preload.hours} hours, ${preload.minutes} minutes and ${preload.seconds} seconds`}
+              aria-live={preloadReady ? 'polite' : undefined}
+            >
+              {preloadReady ? (
+                <span className="preload-ready-message">GTA VI CAN NOW BE PRE LOADED</span>
+              ) : (
+                <>
+                  <span><strong>{String(preload.days).padStart(2, '0')}</strong><small>D</small></span>
+                  <i>:</i>
+                  <span><strong>{String(preload.hours).padStart(2, '0')}</strong><small>H</small></span>
+                  <i>:</i>
+                  <span><strong>{String(preload.minutes).padStart(2, '0')}</strong><small>M</small></span>
+                  <i>:</i>
+                  <span><strong>{String(preload.seconds).padStart(2, '0')}</strong><small>S</small></span>
+                </>
+              )}
             </div>
           </aside>
           <ShareActions days={days} hours={hours} minutes={minutes} seconds={seconds} />
