@@ -8,10 +8,23 @@ import { useCountdown } from './hooks/useCountdown'
 import { useNotifications } from './hooks/useNotifications'
 import { useState } from 'react'
 
+const RELEASE_DATE = new Date('2026-11-19T00:00:00+05:30')
+const PRELOAD_DATE = new Date('2026-11-10T00:00:00+05:30')
+const eventWeekdayFormatter = new Intl.DateTimeFormat('en-IN', {
+  weekday: 'long',
+  timeZone: 'Asia/Kolkata',
+})
+const eventTimeFormatter = new Intl.DateTimeFormat('en-IN', {
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: true,
+  timeZone: 'Asia/Kolkata',
+})
+
 function App() {
   const [intelOpen, setIntelOpen] = useState(false)
-  const { days, hours, minutes, seconds, isLaunched } = useCountdown()
-  const preload = useCountdown(new Date('2026-11-10T00:00:00+05:30').getTime())
+  const { days, hours, minutes, seconds, isLaunched } = useCountdown(RELEASE_DATE.getTime())
+  const preload = useCountdown(PRELOAD_DATE.getTime())
   const { enabled, permission, supported, enableNotifications, disableNotifications } = useNotifications()
   const countdown = [
     { label: 'DAYS', value: days, icon: <CalendarDays size={18} /> },
@@ -48,7 +61,7 @@ function App() {
           <p className="eyebrow"><span /> ROCKSTAR GAMES PRESENTS</p>
           <h1>THE WAIT<br /><em>IS ALMOST OVER.</em></h1>
           <p className="subtitle">WELCOME BACK TO LEONIDA</p>
-          <div className="target-pill"><CalendarDays size={14} /> TARGET: 19 NOV 2026 <b>•</b> 00:00 IST (INDIA)</div>
+          <div className="target-pill"><CalendarDays size={14} /> TARGET: {eventWeekdayFormatter.format(RELEASE_DATE).toUpperCase()}, 19 NOV 2026 <b>•</b> <span className="event-time">{eventTimeFormatter.format(RELEASE_DATE).toUpperCase()} IST</span> (INDIA)</div>
         </section>
 
         <section className="countdown-section" aria-label="Countdown to launch">
@@ -61,7 +74,7 @@ function App() {
             <span className="preload-icon"><Download size={17} /></span>
             <div className="preload-copy">
               <span className="preload-title">INDIA PRELOAD <b>ESTIMATED</b></span>
-              <span className="preload-date">10 NOV 2026 · 00:00 IST</span>
+              <span className="preload-date">{eventWeekdayFormatter.format(PRELOAD_DATE).toUpperCase()} · 10 NOV 2026 · <span className="preload-clock">{eventTimeFormatter.format(PRELOAD_DATE).toUpperCase()} IST</span></span>
             </div>
             <div className="preload-time" aria-label={`${preload.days} days, ${preload.hours} hours, ${preload.minutes} minutes and ${preload.seconds} seconds`}>
               <span><strong>{String(preload.days).padStart(2, '0')}</strong><small>D</small></span>
